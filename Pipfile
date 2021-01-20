@@ -8,6 +8,7 @@ django = "*"
 django-colorfield = "*"
 django-crispy-forms = "*"
 markdown = "*"
+gunicorn = "==19.9.0"
 
 [dev-packages]
 
