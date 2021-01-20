@@ -9,6 +9,7 @@ django-colorfield = "*"
 django-crispy-forms = "*"
 markdown = "*"
 gunicorn = "==19.9.0"
+whitenoise = "==4.1.4"
 
 [dev-packages]
 
