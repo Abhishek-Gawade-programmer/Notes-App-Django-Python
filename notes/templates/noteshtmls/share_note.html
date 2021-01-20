@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	
+	<h1 class="display-3">Share Form</h1>
+	<div>
+		
+	
+		<form method="POST" action="" autocomplete="disable">{% csrf_token %}
+			{{ Share_Form|crispy }}
+			<input type="submit" class="btn btn-block btn-success btn-lg" name="submit" value="Send Email" id="submit">
+		</form>	
+	</div>
+	  <a type="button" href="{% url 'dashboard' %}" style="float: right;" class="btn btn-block btn-warning btn-lg ">Do back TO Dashbaord</a>
+{% endblock %}

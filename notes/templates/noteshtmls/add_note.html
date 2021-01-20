@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %} 
+	
+	<h1 class="display-3">Add Note</h1>
+	<div>
+		
+	
+		<form method="POST" action="" >{% csrf_token %}
+			{{ form|crispy }}
+			<input type="submit" class="btn btn-block btn-lg btn-success" name="submit" value="Add Note" id="submit">
+		</form>	
+	</div>
+	<br>
+	  <a type="button" href="{% url 'dashboard' %}" style="float: right;" class="btn btn-warning btn-lg ">Back To Dashboard ??</a>
+	  <a type="button" href="{% url 'password_change' %}" style="float: left;" class="btn btn-primary btn-lg ">Reset Password</a>
+
+{% endblock %}

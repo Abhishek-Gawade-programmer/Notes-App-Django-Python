@@ -1,0 +1,161 @@
+{% load static %}
+
+{% block nav %}
+  <nav class="navbar navbar-icon-top navbar-expand-lg navbar-dark bg-dark" style="width:100%;position: fixed">
+    <a class="navbar-brand" href="{% url 'intropage' %}">
+    	<img src="{% static 'images/logo.svg' %}" alt="Notes Logo" width="30" height="30" class="d-inline-block align-top">
+      Notes{{ section }}
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+{% if request.user.is_authenticated %}
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url 'dashboard' %}">
+            <i class="fa fa-home"></i>
+            DashBoard
+            <span class="sr-only">(current)</span>
+            </a>
+        </li>
+        <li class="nav-item">
+
+
+            <i class="fa fa-envelope-o">
+            </i>
+            {% if category.title == 'Trash' %}
+            <a href="{% url 'delete_notes_from_trash' %}" title="">
+              <button class="btn btn-danger  my-sm-0" type="submit" style="margin: 0px;font-weight: bolder;">Empty Trash</button>
+            </a>
+            
+            <a href="{% url 'remove_all_notes_trash_to_untagged' %}" title="">
+
+              <button class="btn btn-warning  my-sm-0" type="submit" style="margin: 0px;font-weight: bolder;">Restore All</button>
+            </a>
+              
+            {% endif %}
+            
+          
+        </li>
+
+       <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-envelope-o">
+            </i>
+            
+            <b style="color: white">Sort By</b>
+
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="opacity: 0.8">
+            <a class="dropdown-item" href="{% url 'dashboard' %}" style="color: darkorange;font-weight: bolder;">
+              <img src="{% static 'images/untag.svg' %}" alt="Notes Logo" width="30" height="20" class="d-inline-block align-top">
+            Un Tagged</a>
+            <div class="dropdown-divider"></div>
+    
+            <a class="dropdown-item" href="{% url 'show_objects_category' "Archive" %}" style="color: brown;font-weight: bolder;">
+              <img src="{% static 'images/archive_fill.svg' %}" alt="Notes Logo" width="40" height="20" class="d-inline-block align-top">
+            Archive</a>
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="{% url 'show_favorites_notes' %}" style="color: deeppink;font-weight: bolder;">
+              <img src="{% static 'images/love.svg' %}" alt="Notes Logo" width="40" height="20" class="d-inline-block align-top">
+            My Favs</a>
+        
+
+            <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="{% url 'show_objects_category' "Trash" %}" style="color: red;font-weight: bolder;">
+              <img src="{% static 'images/trash_fill.svg' %}" alt="Notes Logo" width="40" height="20" class="d-inline-block align-top">
+            Trash</a>
+        
+
+          <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="{% url 'show_lock_notes' %}" style="font-weight: bolder;">
+              <img src="{% static 'images/Lockfill.svg' %}" alt="Notes Logo" width="40" height="20" class="d-inline-block align-top">
+            Lock Notes</a>
+            <div class="dropdown-divider"></div>
+
+             <a class="dropdown-item" href="#" style="font-weight: bolder;">
+              <img src="{% static 'images/colors_palette.svg' %}" alt="Notes Logo" width="40" height="20" class="d-inline-block align-top">
+            <span style="color: green;"> Choose Color</span>
+            <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="btn-group mr-2" role="group" aria-label="First group">
+                  <a href="{% url 'sort_by_color' 'red' %}" title="">
+                    <button type="button" class="btn btn-danger"></button>
+                  </a>
+                   <a href="{% url 'sort_by_color' 'green' %}" title="">
+                    <button type="button" class="btn btn-success"></button>
+                  </a>
+                   <a href="{% url 'sort_by_color' 'orange' %}" title="">
+                    <button type="button" class="btn btn-warning"></button>
+                  </a> 
+                  </a> <a href="{% url 'sort_by_color' 'white' %}" title="">
+                    <button type="button" class="btn btn-outline-dark" style="background: white"></button>
+                  </a>
+                  </a> <a href="{% url 'sort_by_color' 'yellow' %}" title="">
+                    <button type="button" class="btn btn-outline-info" style="background: yellow"></button>
+                  </a>
+                  <a href="{% url 'sort_by_color' 'blue' %}" title="">
+                    <button type="button" class="btn btn-primary"></button>
+                  </a>
+              </div>
+
+
+          </a>
+
+
+      </div>
+
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-envelope-o">
+            </i>
+            
+            <b style="color: white">{{ user.username }} </b>
+
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="opacity: 0.8">
+            <a class="dropdown-item" href="{% url 'profile_page' %}" style="color: green;font-weight: bolder;">
+              <img src="{% static 'images/profile.svg' %}" alt="Notes Logo" width="30" height="20" class="d-inline-block align-top">
+            My Profile</a>
+            <div class="dropdown-divider"></div>
+           <a class="dropdown-item" href="{% url 'password_change' %}" style="color: purple;font-weight: bolder;">
+
+              <img src="{% static 'images/password_change.svg' %}" alt="Notes Logo" width="30" height="20" class="d-inline-block align-top">
+            Change Password</a>
+
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{% url 'logout' %}" style="color: red;font-weight: bolder;">
+              <img src="{% static 'images/logout.svg' %}" alt="Notes Logo" width="30" height="20" class="d-inline-block align-top">
+            Log Out</a>
+
+           <div class="dropdown-divider"></div>
+
+            <a class="dropdown-item" href="{% url 'set_password' %}" style="color: darkorange;font-weight: bolder;">
+              <img src="{% static 'images/change_notes_password.svg' %}" alt="Notes Logo" width="30" height="20" class="d-inline-block align-top">
+             {% if request.user.note_password %}
+              Change Note's Password
+
+            {% else %}
+              Set Note's Password
+            {% endif %}</a>
+          </div>
+        </li>
+
+      </ul>
+      <form class="form-inline my-2 my-lg-0" action="{% url 'search_results' %}" method="get">
+        <input class="form-control mr-sm-2" name="q" type="text" placeholder="Search Notes" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form>
+{% endif %}
+    </div>
+  </nav>
+
+{% endblock nav %}

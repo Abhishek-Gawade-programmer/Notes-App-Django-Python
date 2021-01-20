@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% load blog_tags %}
+{% load static %}
+{% block title %}{{ note.heading }}{% endblock title %}
+
+{% block content %}
+<div class="jumbotron">
+
+  <h5 class="display-4">
+    {% if  note.category.title == "Un taged" %}
+      <a href="{% url 'dashboard' %}" title="See All Un-Taged Notes">
+        <img src="{% static 'images/untag.svg' %}" alt="From Un Taged" width="50" height="50" title="From Un Taged Notes" >
+      </a>
+    {% elif  note.category.title  == 'Trash' %}
+    <a href="{% url 'show_objects_category' "Trash" %}" title="See All Trash Notes">
+      <img src="{% static 'images/trash_fill.svg' %}" alt="Form your Trash" width="50" height="50" >
+    </a>
+
+    {% elif  note.category.title  == 'Archive' %}
+      <a href="{% url 'show_objects_category' "Archive" %}" title="See All Archive Notes">
+        <img src="{% static 'images/archive_fill.svg' %}" alt="Form your Archive" width="50" height="50" title="Form your Archive">
+      </a>
+    {% endif %}
+
+  {{ note.heading }}</h5>
+  <p class="lead"><span style="color: black;font-weight: bolder;">Created at</span> &middot; 
+      {{ note.created }} &nbsp;&middot;
+
+        {% if  note.add_to_fav %}
+          <img src="{% static 'images/star_fill.svg' %}" alt="Started Note" width="30"  title="{{ note.heading }} STARRTED ">                  
+
+        {% else %}
+          <img src="{% static 'images/star.svg' %}" alt="Unstarted Note " width="30" title="{{ note.heading }} Not STARRTED ">                  
+        {% endif %}
+        &nbsp;&middot;&nbsp;
+        {% if  note.password_required %}
+          <img src="{% static 'images/Lockfill.svg' %}" alt="Lock Note " width="30" title="{{ note.heading }} Lock ">                   
+
+        {% else %}
+          <img src="{% static 'images/Unlock.svg' %}" alt="UnLock Note" width="30" title="{{ note.heading }} Not Lock ">                   
+        {% endif %}
+        &nbsp;&middot;&nbsp;
+        <a href="{% url 'note_update' note.id %}" title="Edit Note">
+            <img src="{% static 'images/edit_note.svg' %}" alt="Edit Note" title="Edit Note" height="30" width="30" > 
+        </a>&nbsp;&middot;&nbsp;&nbsp;&nbsp;
+
+      {% if  note.category.title == "Un taged" %}
+        <a href="{% url 'move_to_trash' note.pk %}" title="">
+          <img src="{% static 'images/trash_fill.svg' %}" alt="Add To Trash" width="50" height="50" title="Add To Trash" >
+          </a>
+        &nbsp;&middot;&nbsp;
+        <a href="{% url 'move_to_archive' note.pk %}" title="">
+        <img src="{% static 'images/archive_fill.svg' %}" alt="Add To Archive" width="50" height="50" title="Add To Archive">
+        </a>
+        
+
+      {% elif  note.category.title  == 'Trash' %}
+        <a href="{% url 'delete_notes_from_trash' note.pk %}" title="Delete {{ note.heading }} permenntly">
+          <img src="{% static 'images/trash_fill.svg' %}" alt="Add To Trash" width="50" height="50" title="Delete {{ note.heading }} permently" >
+          </a>
+
+          <a href="{% url 'move_to_untagged' note.pk %}" title="">
+          <img src="{% static 'images/untag.svg' %}" alt="Add To Un-Tagged" width="50" height="50" title="Add To Un-Tagged">
+          </a>
+           &nbsp;&middot;&nbsp;
+            <a href="{% url 'move_to_archive' note.pk %}" title="">
+            <img src="{% static 'images/archive_fill.svg' %}" alt="Add To Archive" width="50" height="50" title="Add To Archive">
+            </a>
+
+      {% elif  note.category.title  == 'Archive' %}
+        <a href="{% url 'move_to_trash' note.pk %}" title="">
+          <img src="{% static 'images/trash_fill.svg' %}" alt="Add To Trash" width="50" height="50" title="Add To Trash" >
+          </a>
+          &nbsp;&middot;&nbsp;
+
+        <a href="{% url 'move_to_untagged' note.pk %}" title="">
+          <img src="{% static 'images/untag.svg' %}" alt="Add To Un-Tagged" width="50" height="50" title="Add To Un-Tagged">
+          </a>
+
+    {% endif %}
+
+   </p>
+  <hr class="my-4">
+  <p>{{ note.description|markdown }}</p>
+
+  <p class="lead">
+    <a href="{% url 'share_note_by_email' note.id %}" title="">
+  	<button type="button" class="btn btn-primary btn-lg">
+         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-share" viewBox="0 0 16 16">
+ 	 		<path d="M13.5 1a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zM11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5zm-8.5 4a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3zm11 5.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3z"></path>
+		</svg>
+    Share
+    </button></a>
+    {# <a class="btn btn-primary btn-lg" href="#" role="button">Share</a> #}
+  </p>
+</div>
+
+
+
+
+{% endblock %}

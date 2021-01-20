@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% load static %}
+{% load blog_tags %}
+
+{% block content %}
+<h1>Search Results for "{{ query }}"</h1>
+
+{% if not all_notes %}
+    
+<h1 class="display-4">No Notes Are Found</h1>
+{% else %}
+
+
+
+
+
+
+	<div class="card" >
+	{% for note in all_notes %}
+	{% if  note.colour_of_notes == 'white' %}
+	   <div class="card bg-light"  style="margin-top: 20px !important">
+
+	{% elif  note.colour_of_notes == 'green' %}
+		<div class="card text-dark bg-success" style="margin-top: 20px !important"> 
+
+
+	{% elif  note.colour_of_notes == 'orange' %}
+		<div class="card text-white bg-warning" style="margin-top: 20px !important"> 
+
+	{% elif  note.colour_of_notes == 'blue' %}
+		<div class="card text-white bg-primary" style="margin-top: 20px !important">
+
+	{% elif  note.colour_of_notes == 'red' %}
+		<div class="card text-secondary bg-danger" style="margin-top: 20px !important">  
+
+			
+	{% else %}
+		<div class="card text-danger bg-info" style="margin-top: 20px !important">
+
+	{% endif %}
+	
+		  <h5 class="card-header" id='headertextdate'>
+		  	{% if  note.created ==  note.updated %}
+		  		<img src="{% static 'images/upload.svg' %}" alt="Uploaded at " width="20" title="{{ note.heading }} Uploaded "> 	
+		  	{% else %}
+		  		<img src="{% static 'images/edit.svg' %}" alt="Edited at "  width="20" title="{{ note.heading }} Edited">
+		  	{% endif %}
+		  	&nbsp;&nbsp;{{ note|date_str_output }}
+		  	&nbsp;&nbsp;
+		  	{% if  note.add_to_fav %}
+		  		<img src="{% static 'images/star_fill.svg' %}" alt="Started Note" width="20" title="{{ note.heading }} STARRTED "> 		  			  		
+
+		  	{% else %}
+		  		<img src="{% static 'images/star.svg' %}" alt="Unstarted Note " width="20" title="{{ note.heading }} Not STARRTED "> 		  			  		
+		  	{% endif %}
+		  	&nbsp;&middot;&nbsp;
+		  	{% if  note.password_required %}
+		  		<img src="{% static 'images/Lockfill.svg' %}" alt="Uploaded at " width="20" title="{{ note.heading }} STARRTED "> 		  			  		
+
+		  	{% else %}
+		  		<img src="{% static 'images/Unlock.svg' %}" alt="Uploaded at " width="20" title="{{ note.heading }} Not STARRTED "> 		  			  		
+		  	{% endif %}
+		  	&nbsp;&middot;&nbsp;
+
+
+
+
+      {% if  note.category.title == "Un taged" %}
+        <a href="{% url 'move_to_trash' note.pk %}" title="">
+          <img src="{% static 'images/trash_fill.svg' %}" alt="Add To Trash" width="20" height="20" title="Add To Trash" >
+          </a>
+        &nbsp;&middot;&nbsp;
+        <a href="{% url 'move_to_archive' note.pk %}" title="">
+        <img src="{% static 'images/archive_fill.svg' %}" alt="Add To Archive" width="20" height="20" title="Add To Archive">
+        </a>
+        
+
+      {% elif  note.category.title  == 'Trash' %}
+          <a href="{% url 'move_to_untagged' note.pk %}" title="">
+          <img src="{% static 'images/untag.svg' %}" alt="Add To Un-Tagged" width="20" height="20" title="Add To Un-Tagged">
+          </a>
+           &nbsp;&middot;&nbsp;
+            <a href="{% url 'move_to_archive' note.pk %}" title="">
+            <img src="{% static 'images/archive_fill.svg' %}" alt="Add To Archive" width="20" height="20" title="Add To Archive">
+            </a>
+
+      {% elif  note.category.title  == 'Archive' %}
+        <a href="{% url 'move_to_trash' note.pk %}" title="">
+          <img src="{% static 'images/trash_fill.svg' %}" alt="Add To Trash" width="20" height="20" title="Add To Trash" >
+          </a>
+          &nbsp;&middot;&nbsp;
+
+        <a href="{% url 'move_to_untagged' note.pk %}" title="">
+          <img src="{% static 'images/untag.svg' %}" alt="Add To Un-Tagged" width="20" height="20" title="Add To Un-Tagged">
+          </a>
+
+    {% endif %}
+
+
+		  </h5>
+		  <div class="card-body">	  	
+		    <h5 class="card-title">{{ note.heading }}</h5>
+			    {% if  note.password_required %}
+
+			    	<p class="card-text">This Note I Password Protected Click Eye TO View</p>
+
+				{% else %}
+			    	<p class="card-text">{{ note.description|markdown|striptags|truncatewords:60  }}</p>
+				{% endif %}
+			  <div>
+					  <a href="{{ note.get_absolute_url }}"  alt="View Note" title="View Note" style="margin-left: 10px">
+					  	<button type="button" class="btn btn-danger " >
+					  		<img src="{% static 'images/view_eye.svg' %}" alt="View Note" title="View Note" height="25" width="25" >	
+					  	</button>
+					  </a>
+
+					   <a href="{% url 'note_update' note.id %}"  alt="Edit Note" title="Edit Note" style="margin-left: 10px">
+					  	<button type="button" class="btn btn-warning " >
+					  		<img src="{% static 'images/edit_note.svg' %}" alt="Edit Note" title="Edit Note" height="25" width="25" >	
+					  	</button>
+					  </a>
+
+					  <a href="{{ note.get_absolute_url }}" alt="Share Note" title="Share Note" style="margin-left: 10px">
+					  	<button type="button" class="btn btn-success " >
+					  		<img src="{% static 'images/share.svg' %}" alt="Share Note" title="Share Note" height="25" width="25" >	
+					  	</button>
+					  </a>
+				</div>   	
+		  </div>
+		  	
+		</div>
+	{% endfor %}
+</div>
+
+{% endif %}
+
+<a href="{% url 'add_note' %}">
+	<div class="add_button" style="background:green">
+		<img src="{% static 'images/onlyplus.svg' %}" alt="Add Note" height="80" width="80" >	
+	</div>
+</a>
+
+
+    
+{% endblock content %}

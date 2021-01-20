@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Welcome to <b>Notes App</b> !!</h1>
+    <p class="lead">
+    	<ul>
+    		<li>edit </li>
+    		<li>save notes with password </li>
+    		<li>add colors to notes </li>
+    		<li>add to trash</li>    		
+    		<li>Share the notes with friends</li>
+    		<li>Supported Markdown </li>
+
+    	</ul>
+    </p>
+      <br>
+      
+    <p class="lead">
+		  <a type="button" href="{% url 'login' %}" style="float: right;" class="btn btn-warning btn-lg btn-block">Login To  Account</a>
+		  <a type="button" href="{% url 'register' %}" style="float: left;" class="btn btn-primary btn-lg btn-block">Create To Account</a>
+ 	</p>
+  </div>
+</div>
+
+{% endblock %}
