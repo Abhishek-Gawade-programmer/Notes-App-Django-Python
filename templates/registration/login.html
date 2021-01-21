@@ -9,11 +9,13 @@
 	
 		<form method="POST" action="" >{% csrf_token %}
 			{{ form|crispy }}
-			<input type="submit" class="btn btn-block btn-success" name="submit" value="Log In" id="submit">
+			<input type="submit" class="btn btn-block btn-success btn-lg" name="submit" value="Log In" id="submit">
 		</form>	
 	</div>
+	<hr>
 	<br>
-	  <a type="button" href="{% url 'password_reset' %}" style="float: right;" class="btn btn-warning btn-lg ">Forgot Password ??</a>
-	  <a type="button" href="{% url 'register' %}" style="float: left;" class="btn btn-primary btn-lg ">Register Account</a>
+  		<a type="button" href="{% url 'demo_user_login' %}" class="btn btn-dark btn-lg btn-block">Demo Login</a>
+  		<a type="button" href="{% url 'password_reset' %}"  class="btn btn-block  btn-warning btn-lg ">Forgot Password ??</a>
+  		<a type="button" href="{% url 'register' %}"  class="btn btn-block  btn-primary btn-lg ">Register Account</a>
 
 {% endblock %}

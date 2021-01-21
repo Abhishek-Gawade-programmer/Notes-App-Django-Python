@@ -10,12 +10,12 @@ from .views import (
 						show_objects_category,show_favorites_notes,
 						show_lock_notes,move_to_untagged,remove_all_notes_trash_to_untagged,
 						delete_notes_from_trash,share_note_by_email,
-						sort_by_color
+						sort_by_color,demo_user_login
 
 					)
 
 urlpatterns = [
-
+	path('note/demo_user_login/',demo_user_login,name='demo_user_login'),
 	path('note/share/<uuid:pk>/',share_note_by_email,name='share_note_by_email'),
 	
 	path('note/delete_notes_from_trash/<uuid:pk>/',delete_notes_from_trash,name='delete_notes_from_trash'),

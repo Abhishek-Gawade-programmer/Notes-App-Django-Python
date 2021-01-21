@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% block title %}Add Note{% endblock title %}
 {% block content %} 
 	
 	<h1 class="display-3">Add Note</h1>
@@ -11,8 +12,9 @@
 			<input type="submit" class="btn btn-block btn-lg btn-success" name="submit" value="Add Note" id="submit">
 		</form>	
 	</div>
+	<hr>
 	<br>
-	  <a type="button" href="{% url 'dashboard' %}" style="float: right;" class="btn btn-warning btn-lg ">Back To Dashboard ??</a>
-	  <a type="button" href="{% url 'password_change' %}" style="float: left;" class="btn btn-primary btn-lg ">Reset Password</a>
+
+	  <a type="button" href="{% url 'dashboard' %}"  class="btn btn-warning btn-lg  btn-block">Back To Dashboard ??</a>
 
 {% endblock %}

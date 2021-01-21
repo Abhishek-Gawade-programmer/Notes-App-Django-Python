@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load blog_tags %}
+{% block title %}Dashboard{% endblock title %}
 {% block content %}
 
 
@@ -29,8 +30,8 @@
 
 
 
-	<div class="card" >
 	{% for note in all_notes %}
+		<div class="card" >
 	{% if  note.colour_of_notes == 'white' %}
 	   <div class="card bg-light"  style="margin-top: 20px !important">
 

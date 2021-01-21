@@ -1,22 +1,38 @@
 {% extends "base.html" %}
+{% block title %}Introduction{% endblock title %}
 {% block content %}
-<div class="jumbotron jumbotron-fluid">
-  <div class="container">
-    <h1 class="display-4">Welcome to <b>Notes App</b> !!</h1>
-    <p class="lead">
-    	<ul>
-    		<li>edit </li>
-    		<li>save notes with password </li>
-    		<li>add colors to notes </li>
-    		<li>add to trash</li>    		
-    		<li>Share the notes with friends</li>
-    		<li>Supported Markdown </li>
 
-    	</ul>
-    </p>
-      <br>
+<div class="jumbotron">
+  <div class="container">
+    <div style="font-size: 170%">
+      
+   
+    <h1>Notes App</h1>
+<p><em>Create Your Notes Like Your Writing on Notebook</em></p>
+<hr>
+<h2># Features</h2>
+<ul>
+<li>You can  <strong>Create</strong> , <strong>Add</strong>  ,  <strong>Edit</strong>  and <strong>Delete</strong>  Your Notes.</li>
+<br>
+<li>You <strong>Share</strong> it with your friends via <strong>email</strong></li>
+<br>
+<li>You can <strong>Lock</strong>  ,  <strong>Add Colour</strong> , <strong>Mark As Favorites</strong>  and <strong>Archive</strong> Your Notes.</li>
+<br>
+<li>You can Make Your Notes Beautiful  without knowing <code>HTML</code> or <code>CSS</code> by using <a href="https://guides.github.com/features/mastering-markdown/"><strong>Markdown</strong></a> ...</li>
+<br>
+<li>You can also add <strong>Images</strong> and emoji via <a href="https://guides.github.com/features/mastering-markdown/"><strong>Markdown</strong></a> To Make Notes Beautiful</li>
+<br>
+<li>Your Notes are <strong>Secure</strong> and <strong>None</strong> can access your notes </li>
+<br>
+<li>Your <strong>LogOut</strong> &amp; <strong>LogIn</strong> from Any device and from <strong>Anywhere</strong></li>
+<br>
+<li>Try My Notes App by using Demo Login</li>
+<br>
+</ul> </div>
+
       
     <p class="lead">
+          <a type="button" href="{% url 'demo_user_login' %}" style="float: left;" class="btn btn-dark btn-lg btn-block">Demo Login</a>
 		  <a type="button" href="{% url 'login' %}" style="float: right;" class="btn btn-warning btn-lg btn-block">Login To  Account</a>
 		  <a type="button" href="{% url 'register' %}" style="float: left;" class="btn btn-primary btn-lg btn-block">Create To Account</a>
  	</p>

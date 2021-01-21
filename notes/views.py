@@ -23,6 +23,8 @@ from django.db.models import Q
 
 from django.contrib import messages
 
+from django.contrib.auth import authenticate,login
+
 item_dict={}
 
 def register(request):
@@ -125,7 +127,7 @@ def NoteUpdateView(request,pk):
 			return redirect('check_password')
 		else:
 			form.save()
-			messages.success(request, f'''Note <a href="{reverse('note_update',args=[str(obj.pk)])}" class="alert-link">"{obj.heading}"</a> successfully''')
+			messages.success(request, f'''Note <a href="{reverse('note_update',args=[str(obj.pk)])}" class="alert-link">"{obj.heading}"</a> successfully Updated''')
 			return redirect(Note.objects.filter(author=request.user).get(id=pk).get_absolute_url())
 
 	else:#want form
@@ -349,6 +351,16 @@ def share_note_by_email(request,pk):
 def sort_by_color(request,color):
 	all_notes=Note.objects.filter(author=request.user).filter(colour_of_notes=color)[::-1]
 	return render(request,'noteshtmls/dashboard.html',{'all_notes':all_notes,'category':color.upper()+' colors Notes'})
+
+def demo_user_login(request):
+	user =authenticate(request,
+				username='DemoUser',
+				password='test123@#')
+	login(request, user)
+	return redirect('dashboard')
+
+
+
 
 
 

@@ -1,0 +1,17 @@
+*.env
+.env
+
+#magration folder
+**/migrations/
+
+
+# DJANGO LOGS   
+static/
+
+#DATABASE FILES
+db.sqlite3
+__pycache__/*
+
+
+#THE COMPLIED PYTHON
+*.pyc

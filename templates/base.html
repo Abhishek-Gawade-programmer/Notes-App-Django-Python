@@ -3,43 +3,54 @@
 {% include 'navi.html' %}
 <!DOCTYPE html>
 <html>
+ <meta name="description" content="Craete The Notes Like You Are Writing In Notebook ">
+    <meta name="author" content="Abhishek Gawade">
+
+    <!-- OG Meta Tags to improve the way the post looks when you share the page on LinkedIn, Facebook, Google+ -->
+	<meta property="og:site_name" content="Notes APP" > <!-- website name -->
+	<meta property="og:site" content="Notes APP" /> <!-- website link -->
+	<meta property="og:title" content="Notes APP"/> <!-- title shown in the actual shared post -->
+	<meta property="og:description" content="Craete The Notes Like You Are Writing In Notebook" /> <!-- description shown in the actual shared post -->
+	<meta property="og:image" content="" /> <!-- image link, make sure it's jpg -->
+	<meta property="og:url" content="{% url 'intropage' %}" > <!-- where do you want your post to link to -->
+	<meta property="og:type" content="Notes App" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
 <head>
-	<title>Notes |
-		{% if section %}{% block title %}{{ section }}{% endblock title %}{% endif %}
-	</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+	<title>Notes |  {% block title %}Main{% endblock title %}</title>
+	<link rel="icon" href="{% static 'favicon.png' %}">
+
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
 </head>
 
 
-<body>
-{% block nav %}{% endblock nav %}
-<br><br><br>
-<script type="text/javascript">
-    $(".alert").alert('close')
-</script>
 
-	<div class="container">
-    {% if messages %}
-        {% for message in messages %}
-            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-             {{ message|safe }}
-              <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button >
-            </div>
-        {% endfor %}
-    {% endif %}
-		{% block content %}
-		    <h1 style="color:white">
-		    GoodMoring</h1>
-		{% endblock content %}
+<body>
+
+	<main role="main" class="container">
+
+	{% block nav %}{% endblock nav %}
+	<br><br><br>
+	    {% if messages %}
+	        {% for message in messages %}
+	            <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+	             {{ message|safe }}
+	              <button  type="button" class="close" data-dismiss="alert" aria-label="Close">
+	                <span aria-hidden="true">&times;</span>
+	              </button>
+	            </div>
+	        {% endfor %}
+
+	    {% endif %}
+	    {% block content %}{% endblock content %}
 				
-	</div>
+</main>
 
 </body>
 </html>

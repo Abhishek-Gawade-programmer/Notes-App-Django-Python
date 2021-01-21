@@ -27,7 +27,6 @@
     column-count: 1;
   }
 }
-*/
-a {text-decoration: none !important;}
+*/a {text-decoration: none !important;}
 .add_button{background: black !important;fill: white !important;right: 20 !important;bottom: 20;position: fixed;border-radius: 50%;padding: 2px}
 nav{z-index: 1 !important;}
